@@ -1,3 +1,27 @@
+export const users = [
+    {
+        firstName: 'Tony',
+        lastName: 'Stark',
+        dateOfBirth: '11 janvier 1986',
+        startDate: '11 janvier 2010',
+        department: 'Engenerring',
+        street: '75 bdv Bama',
+        city: 'Bama',
+        state: 'Alabama',
+        zipCode: '75000',
+    },
+    {
+        firstName: 'Captaine',
+        lastName: 'Marvel',
+        dateOfBirth: '13 janvier 1986',
+        startDate: '13 janvier 2010',
+        department: 'Engenerring',
+        street: '73 bdv Bam',
+        city: 'Bam',
+        state: 'Alabama',
+        zipCode: '73000',
+    }
+]
 export const states = [
     {
         'name': 'Alabama',

@@ -1,20 +1,11 @@
 import './create-employee.scss';
-import {states, departments} from '../../services/data';
+import React, {useEffect} from 'react';
+import {Context} from '../../index';
+import {states, departments, users} from '../../services/data';
 
 function CreateEmployee() {
 
     /*$( function() {
-        const stateSelect = document.getElementById('state');
-        states.forEach(function(state) {
-            const option = document.createElement('option');
-            option.value = state.abbreviation;
-            option.text = state.name;
-            stateSelect.appendChild(option);
-        });
-
-        $( "#department" ).selectmenu();
-        $( "#state" ).selectmenu();
-
         $('#date-of-birth').datetimepicker({
             timepicker: false,
             format: 'm/d/Y'
@@ -24,19 +15,28 @@ function CreateEmployee() {
             format: 'm/d/Y'
         });
     });
+    */
 
-    function saveEmployee() {
-        const firstName = document.getElementById('first-name');
-        const lastName = document.getElementById('last-name');
-        const dateOfBirth = document.getElementById('date-of-birth');
-        const startDate = document.getElementById('start-date');
-        const department = document.getElementById('department');
-        const street = document.getElementById('street');
-        const city = document.getElementById('city');
-        const state = document.getElementById('state');
-        const zipCode = document.getElementById('zip-code');
+    const valueFromContext = React.useContext(Context);
 
-        const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    useEffect(() => {
+        valueFromContext.setStates(states);
+        valueFromContext.setDepartments(departments);
+        valueFromContext.setUsers(users);
+    }, [])
+
+    const saveEmployee = (e) => {
+        e.preventDefault()
+        const firstName = e.target.firstName;
+        const lastName = e.target.lastName;
+        const dateOfBirth = e.target.dateOfBirth;
+        const startDate = e.target.startDate;
+        const department = e.target.department;
+        const street = e.target.street;
+        const city = e.target.city;
+        const state = e.target.state;
+        const zipCode = e.target.zipCode;
+
         const employee = {
             firstName: firstName.value,
             lastName: lastName.value,
@@ -48,10 +48,15 @@ function CreateEmployee() {
             state: state.value,
             zipCode: zipCode.value
         };
-        employees.push(employee);
-        localStorage.setItem('employees', JSON.stringify(employees));
-        $('#confirmation').modal();
-    }*/
+
+        const newUsers = [...valueFromContext.users]
+        newUsers.push(employee);
+        valueFromContext.setUsers(newUsers);
+        alert('Employee Created!')
+        /*  $('#confirmation').modal();*/
+    }
+
+    console.log(valueFromContext);
 
     return (
         <main>
@@ -61,18 +66,18 @@ function CreateEmployee() {
             <div className="container">
                 <a href="/employees">View Current Employees</a>
                 <h2>Create Employee</h2>
-                <form action="#" id="create-employee">
-                    <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name"/>
+                <form onSubmit={saveEmployee} action="#" id="create-employee">
+                    <label htmlFor="firstName">First Name</label>
+                    <input type="text" id="firstName"/>
 
-                    <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name"/>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" id="lastName"/>
 
-                    <label htmlFor="date-of-birth">Date of Birth</label>
-                    <input id="date-of-birth" type="text"/>
+                    <label htmlFor="dateOfBirth">Date of Birth</label>
+                    <input id="dateOfBirth" type="text"/>
 
-                    <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text"/>
+                    <label htmlFor="startDate">Start Date</label>
+                    <input id="startDate" type="text"/>
 
                     <fieldset className="address">
                         <legend>Address</legend>
@@ -85,26 +90,26 @@ function CreateEmployee() {
 
                         <label htmlFor="state">State</label>
                         <select name="state" id="state">
-                            {states.map((state, index) => (
-                                <option key={`${index}`} value={state.name}>{state.name}</option>
+                            {valueFromContext.states.map((state, index) => (
+                                <option key={`${index}`} value={state.abbreviation}>{state.name}</option>
                             ))}
                         </select>
 
-                        <label htmlFor="zip-code">Zip Code</label>
-                        <input id="zip-code" type="number"/>
+                        <label htmlFor="zipCode">Zip Code</label>
+                        <input id="zipCode" type="number"/>
                     </fieldset>
 
                     <label htmlFor="department">Department</label>
                     <select name="department" id="department">
-                        {departments.map((department, index) => (
+                        {valueFromContext.departments.map((department, index) => (
                             <option key={`${index}`}>{department.name}</option>
                         ))}
                     </select>
+                    <button type="submit">Save</button>
                 </form>
 
-                <button onClick="saveEmployee()">Save</button>
             </div>
-            <div id="confirmation" className="modal">Employee Created!</div>
+           {/* <div id="confirmation" className="modal">Employee Created!</div>*/}
         </main>
     );
 }
