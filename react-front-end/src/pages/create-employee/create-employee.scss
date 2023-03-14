@@ -12,6 +12,11 @@
   justify-content: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 label {
   display: block;
   margin-top: 1rem;
@@ -19,6 +24,9 @@ label {
 }
 
 .address {
-  padding-right: 40px;
+  margin-top: 10px;
+}
+
+button {
   margin-top: 10px;
 }

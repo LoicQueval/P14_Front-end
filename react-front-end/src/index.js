@@ -26,7 +26,6 @@ export const Context = React.createContext({
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 const Index = () => {
     const [states, setStates] = useState([]);
     const [departments, setDepartments] = useState([]);

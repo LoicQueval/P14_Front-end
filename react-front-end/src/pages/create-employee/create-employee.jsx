@@ -53,7 +53,7 @@ function CreateEmployee() {
         newUsers.push(employee);
         valueFromContext.setUsers(newUsers);
         alert('Employee Created!')
-        /*  $('#confirmation').modal();*/
+        /*$('#confirmation').modal();*/
     }
 
     console.log(valueFromContext);
