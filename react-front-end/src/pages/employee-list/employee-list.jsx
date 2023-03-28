@@ -3,6 +3,7 @@ import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {Context} from '../../index';
 import DataTable from 'react-data-table-component';
+
 export const EmployeeList = () => {
     const {users} = useContext(Context);
     const [filteredUsers, filterUsers] = React.useState(users);
@@ -73,14 +74,16 @@ export const EmployeeList = () => {
 
     return (
         <main>
-            <div className="container">
+            <div className="container-list">
                 <h1>Current Employees</h1>
-                <input
-                    type="text"
-                    placeholder="Search"
-                    onChange={(e) => filter(e.target.value)}
-                />
                 <div>
+                    <div className="search">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            onChange={(e) => filter(e.target.value)}
+                        />
+                    </div>
                     <DataTable
                         direction="auto"
                         columns={columns}
