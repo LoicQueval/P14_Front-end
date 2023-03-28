@@ -16,7 +16,10 @@ export const EmployeeList = () => {
                     item.department.toLowerCase().includes(txt.toLowerCase()) ||
                     item.city.toLowerCase().includes(txt.toLowerCase()) ||
                     item.state.toLowerCase().includes(txt.toLowerCase()) ||
-                    item.street.toLowerCase().includes(txt.toLowerCase())
+                    item.street.toLowerCase().includes(txt.toLowerCase()) ||
+                    item.dateOfBirth.toString().includes(txt) ||
+                    item.startDate.toString().includes(txt) ||
+                    item.zipCode.toString().includes(txt)
             ));
     }
 
