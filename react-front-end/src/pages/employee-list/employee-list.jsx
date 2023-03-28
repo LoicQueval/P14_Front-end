@@ -1,5 +1,6 @@
 import './employee-list.scss'
 import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 import {Context} from '../../index';
 import DataTable from 'react-data-table-component';
 export const EmployeeList = () => {
@@ -69,14 +70,14 @@ export const EmployeeList = () => {
 
     return (
         <main>
-            <div id="employee-div" className="container">
+            <div className="container">
                 <h1>Current Employees</h1>
                 <input
                     type="text"
                     placeholder="Search"
                     onChange={(e) => filter(e.target.value)}
                 />
-                <div className="display">
+                <div>
                     <DataTable
                         direction="auto"
                         columns={columns}
@@ -89,7 +90,7 @@ export const EmployeeList = () => {
                         subHeader={false}
                     />
                 </div>
-                <a href="/">New employee</a>
+                <Link to="/">New employee</Link>
             </div>
         </main>
     );
