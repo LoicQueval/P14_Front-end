@@ -1,7 +1,7 @@
 import './create-employee.scss';
 import React, {useState} from 'react';
-import {Context} from '../../index';
 import {Link} from 'react-router-dom';
+import {Context} from '../../index';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {Modal} from 'loic-react-modal/dist';
@@ -41,7 +41,7 @@ function CreateEmployee() {
         const newUsers = [...valueFromContext.users, employee]
         valueFromContext.setUsers(newUsers);
     }
-    console.log(valueFromContext);
+
     return (
         <main>
             <div className="title">
@@ -103,4 +103,5 @@ function CreateEmployee() {
         </main>
     );
 }
+
 export default CreateEmployee;

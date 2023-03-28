@@ -265,6 +265,7 @@ const states = [
         'abbreviation': 'WY'
     }
 ];
+
 const departments = [
     {
         'name': '',

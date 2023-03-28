@@ -1,6 +1,6 @@
+import './index.css';
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import CreateEmployee from './pages/create-employee/create-employee';
@@ -29,7 +29,6 @@ const Index = () => {
         setStates(data.states);
         setDepartments(data.departments);
         setUsers(data.users);
-        console.log("Data loaded")
     }, []);
 
     return (

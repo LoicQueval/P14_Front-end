@@ -10,19 +10,16 @@
   align-items: center;
   justify-content: center;
 }
-
-form {
+.container form {
   display: flex;
   flex-direction: column;
 }
-
-label {
+.container form label {
   display: block;
   margin-top: 1rem;
   margin-bottom: 10px;
 }
-
-.address {
+.container form .address {
   margin-top: 10px;
 }
 
