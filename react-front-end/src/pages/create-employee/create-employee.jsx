@@ -1,117 +1,106 @@
 import './create-employee.scss';
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {Context} from '../../index';
-import {states, departments, users} from '../../services/data';
+import {Link} from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import {Modal} from 'loic-react-modal/dist';
 
 function CreateEmployee() {
-
-    /*$( function() {
-        $('#date-of-birth').datetimepicker({
-            timepicker: false,
-            format: 'm/d/Y'
-        });
-        $('#start-date').datetimepicker({
-            timepicker: false,
-            format: 'm/d/Y'
-        });
-    });
-    */
-
     const valueFromContext = React.useContext(Context);
-
-    useEffect(() => {
-        valueFromContext.setStates(states);
-        valueFromContext.setDepartments(departments);
-        valueFromContext.setUsers(users);
-    }, [])
-
+    const [firstName, setFistName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [department, setDepartment] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipCode, setZipCode] = useState('');
     const saveEmployee = (e) => {
         e.preventDefault()
-        const firstName = e.target.firstName;
-        const lastName = e.target.lastName;
-        const dateOfBirth = e.target.dateOfBirth;
-        const startDate = e.target.startDate;
-        const department = e.target.department;
-        const street = e.target.street;
-        const city = e.target.city;
-        const state = e.target.state;
-        const zipCode = e.target.zipCode;
-
         const employee = {
-            firstName: firstName.value,
-            lastName: lastName.value,
-            dateOfBirth: dateOfBirth.value,
-            startDate: startDate.value,
-            department: department.value,
-            street: street.value,
-            city: city.value,
-            state: state.value,
-            zipCode: zipCode.value
+            firstName: firstName,
+            lastName: lastName,
+            dateOfBirth: dateOfBirth ? dateOfBirth.toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }) : '',
+            startDate: startDate ? startDate.toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }) : '',
+            department: department,
+            street: street,
+            city: city,
+            state: state,
+            zipCode: zipCode
         };
-
-        const newUsers = [...valueFromContext.users]
-        newUsers.push(employee);
+        const newUsers = [...valueFromContext.users, employee]
         valueFromContext.setUsers(newUsers);
-        alert('Employee Created!')
-        /*$('#confirmation').modal();*/
     }
-
     console.log(valueFromContext);
-
     return (
         <main>
             <div className="title">
                 <h1>HRnet</h1>
             </div>
             <div className="container">
-                <a href="/employees">View Current Employees</a>
+                <Link to="/employees">View Current Employees</Link>
                 <h2>Create Employee</h2>
                 <form onSubmit={saveEmployee} action="#" id="create-employee">
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName"/>
+                    <input type="text" id="firstName" onChange={(event) => setFistName(event.target.value)}/>
 
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName"/>
+                    <input type="text" id="lastName" onChange={(event) => setLastName(event.target.value)}/>
 
                     <label htmlFor="dateOfBirth">Date of Birth</label>
-                    <input id="dateOfBirth" type="text"/>
+                    <DatePicker selected={dateOfBirth}
+                                onChange={(date) => setDateOfBirth(date)}
+                                dateFormat="MM/dd/yyyy">
+                    </DatePicker>
 
                     <label htmlFor="startDate">Start Date</label>
-                    <input id="startDate" type="text"/>
+                    <DatePicker selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                dateFormat="MM/dd/yyyy">
+                    </DatePicker>
 
                     <fieldset className="address">
                         <legend>Address</legend>
 
                         <label htmlFor="street">Street</label>
-                        <input id="street" type="text"/>
+                        <input id="street" type="text" onChange={(event) => setStreet(event.target.value)}/>
 
                         <label htmlFor="city">City</label>
-                        <input id="city" type="text"/>
+                        <input id="city" type="text" onChange={(event) => setCity(event.target.value)}/>
 
                         <label htmlFor="state">State</label>
-                        <select name="state" id="state">
+                        <select name="state" id="state" onChange={(event) => setState(event.target.value)}>
                             {valueFromContext.states.map((state, index) => (
                                 <option key={`${index}`} value={state.abbreviation}>{state.name}</option>
                             ))}
                         </select>
 
                         <label htmlFor="zipCode">Zip Code</label>
-                        <input id="zipCode" type="number"/>
+                        <input id="zipCode" type="number" onChange={(event) => setZipCode(event.target.value)}/>
                     </fieldset>
 
                     <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
+                    <select name="department" id="department" onChange={(event) => setDepartment(event.target.value)}>
                         {valueFromContext.departments.map((department, index) => (
                             <option key={`${index}`}>{department.name}</option>
                         ))}
                     </select>
-                    <button type="submit">Save</button>
+                    <Modal buttonText="Save">
+                        Employee Created!
+                    </Modal>
                 </form>
-
             </div>
-           {/* <div id="confirmation" className="modal">Employee Created!</div>*/}
         </main>
     );
 }
-
 export default CreateEmployee;

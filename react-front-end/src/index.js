@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import CreateEmployee from './pages/create-employee/create-employee';
 import {EmployeeList} from './pages/employee-list/employee-list';
+import {data} from './services/data';
 
 const router = createBrowserRouter([
     {
@@ -16,20 +17,20 @@ const router = createBrowserRouter([
         element: <EmployeeList/>,
     },
 ]);
-export const Context = React.createContext({
-    states: [],
-    departments: [],
-    users: [],
-    setStates: {},
-    setDepartments: {},
-    setUsers: {},
-});
+export const Context = React.createContext(undefined);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const Index = () => {
-    const [states, setStates] = useState([]);
-    const [departments, setDepartments] = useState([]);
-    const [users, setUsers] = useState([]);
+    const [states, setStates] = useState(data.states);
+    const [departments, setDepartments] = useState(data.departments);
+    const [users, setUsers] = useState(data.users);
+
+    useEffect(() => {
+        setStates(data.states);
+        setDepartments(data.departments);
+        setUsers(data.users);
+        console.log("Data loaded")
+    }, []);
 
     return (
         <React.StrictMode>

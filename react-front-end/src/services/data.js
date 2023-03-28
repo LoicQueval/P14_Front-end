@@ -1,9 +1,9 @@
-export const users = [
+const users = [
     {
         firstName: 'Tony',
         lastName: 'Stark',
-        dateOfBirth: '11 janvier 1986',
-        startDate: '11 janvier 2010',
+        dateOfBirth: '01/11/2010',
+        startDate: '01/11/2010',
         department: 'Engenerring',
         street: '75 bdv Bama',
         city: 'Bama',
@@ -13,8 +13,8 @@ export const users = [
     {
         firstName: 'Captaine',
         lastName: 'Marvel',
-        dateOfBirth: '13 janvier 1986',
-        startDate: '13 janvier 2010',
+        dateOfBirth: '01/13/1986',
+        startDate: '01/13/1986',
         department: 'Engenerring',
         street: '73 bdv Bam',
         city: 'Bam',
@@ -22,7 +22,12 @@ export const users = [
         zipCode: '73000',
     }
 ]
-export const states = [
+
+const states = [
+    {
+        'name': '',
+        'abbreviation': ''
+    },
     {
         'name': 'Alabama',
         'abbreviation': 'AL'
@@ -260,7 +265,10 @@ export const states = [
         'abbreviation': 'WY'
     }
 ];
-export const departments = [
+const departments = [
+    {
+        'name': '',
+    },
     {
         'name': 'Sales',
     },
@@ -277,3 +285,9 @@ export const departments = [
         'name': 'Legal',
     },
 ]
+export const data = {
+    users: users,
+    states: states,
+    departments: departments,
+}
+
